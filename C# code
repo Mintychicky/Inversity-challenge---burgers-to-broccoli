@@ -1,0 +1,206 @@
+using System;
+
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        
+        //Note: Hi I'm very new to coding with about a 1 week experience to C# but please enjoy this really simple code I made for my idea :D
+        
+        Console.WriteLine ("Hello! Welcome to My Diet's simulation!");
+        Console.WriteLine ("This simulation fatures the following dishes:");
+        Console.WriteLine ("tomato pasta, chicken sandwhich, chicken salad");
+        Console.WriteLine ("");
+        
+        Console.WriteLine ("Scenario for this simulation: You are a male office worker aged 24, your BMI is 27 (overweight), the recommended calorie intake is 2800, and your weight last week is 78kg. You are currently entering what you ate today at the start of a diet cycle.");
+        Console.WriteLine ("");
+        
+        //variables
+        int weightlastweek = 78;
+        int weightthisweek = 0;
+        string food = "Nothing";
+        int tomato = 0;
+        int glutenproducts = 0;
+        int chicken = 0;
+        int lettuce = 0;
+        string simloop = "Nothing";
+        int simulationloop = 1;
+        int simweightlastweek = 80;
+        int simweightthisweek = 0;
+        
+        Console.WriteLine ("Enter your weight this week:"); //Entering diet progress at the start of each diet cycle
+        weightthisweek = int.Parse(Console.ReadLine());
+        Console.WriteLine ("");
+        
+        if ((weightlastweek -= weightthisweek) > 0) //AI recording what components made your diet successful
+        {
+            Console.WriteLine ("You've lost weight!");
+            Console.WriteLine ("Please enter what you ate today: (lowercase)");
+            food = Convert.ToString(Console.ReadLine());
+            if (food == "tomato pasta")
+            {
+                tomato += 1;
+                glutenproducts += 1;
+            }
+            if (food == "chicken sandwhich")
+            {
+                chicken += 1;
+                glutenproducts += 1;
+            }
+            if (food == "chicken salad")
+            {
+                tomato += 1;
+                lettuce += 1;
+                chicken +=1;
+            }
+            
+            
+            
+        }
+        else //AI recording what made your diet unsuccessful
+        {
+            Console.WriteLine ("You've havent lost any weight!");
+            Console.WriteLine ("Please enter what you ate today:");
+            food = Convert.ToString(Console.ReadLine());
+            if (food == "tomato pasta")
+            {
+                tomato -= 1;
+                glutenproducts -= 1;
+            }
+            if (food == "chicken sandwhich")
+            {
+                chicken -= 1;
+                glutenproducts -= 1;
+            }
+            if (food == "chicken salad")
+            {
+                tomato -= 1;
+                lettuce -= 1;
+                chicken -=1;
+            }
+        }
+        weightlastweek = weightthisweek; //Saves weight this week for calculation next time
+        Console.WriteLine ("");
+        Console.WriteLine ("Your diet outcome this week:");
+        Console.WriteLine ("Tomato:" + tomato);
+        Console.WriteLine ("Gluten Products:" + glutenproducts);
+        Console.WriteLine ("Chicken:" + chicken);
+        Console.WriteLine ("Lettuce:" + lettuce);
+        
+        Console.WriteLine ("Now let's create a simulation of what others also aged around 27 years old and is overweighted are inputing for what they ate the previous week!");
+        
+        while (simulationloop > 0) //simulation of other people inputing their diet (all weighted 80kg last week)
+        {
+            Console.WriteLine ("");
+            Console.WriteLine ("Enter your weight this week:"); //Entering diet progress at the start of each diet cycle
+            simweightthisweek = int.Parse(Console.ReadLine());
+        
+            if ((simweightlastweek -= simweightthisweek) > 0) //AI recording what components made your diet successful
+        {
+            Console.WriteLine ("You've lost weight!");
+            Console.WriteLine ("Please enter what you ate today: (lowercase)");
+            food = Convert.ToString(Console.ReadLine());
+            if (food == "tomato pasta")
+            {
+                tomato += 1;
+                glutenproducts += 1;
+            }
+            if (food == "chicken sandwhich")
+            {
+                chicken += 1;
+                glutenproducts += 1;
+            }
+            if (food == "chicken salad")
+            {
+                tomato += 1;
+                lettuce += 1;
+                chicken +=1;
+            }
+            
+            
+            
+        }
+        else //AI recording what made your diet unsuccessful
+        {
+            Console.WriteLine ("You've haven't lost any weight!");
+            Console.WriteLine ("Please enter what you ate today:");
+            food = Convert.ToString(Console.ReadLine());
+            if (food == "tomato pasta")
+            {
+                tomato -= 1;
+                glutenproducts -= 1;
+            }
+            if (food == "chicken sandwhich")
+            {
+                chicken -= 1;
+                glutenproducts -= 1;
+            }
+            if (food == "chicken salad")
+            {
+                tomato -= 1;
+                lettuce -= 1;
+                chicken -=1;
+            }
+        }
+        simweightlastweek = 80; //reset simulation
+        Console.WriteLine ("End simulation? (yes/no)"); //End simulation
+        simloop = Console.ReadLine();
+        if (simloop == "yes")
+        {
+            simulationloop -= 1;
+        }
+        }
+        Console.WriteLine ("");
+        Console.WriteLine ("Total diet outcome this week:");
+        Console.WriteLine ("Tomato:" + tomato);
+        Console.WriteLine ("Gluten Products:" + glutenproducts);
+        Console.WriteLine ("Chicken:" + chicken);
+        Console.WriteLine ("Lettuce:" + lettuce);
+        Console.WriteLine ("");
+        Console.WriteLine ("-- simulation ended --");
+        Console.WriteLine ("");
+        Console.WriteLine ("Most consumed ingriedient leading to a successful diet this week:");
+        var ingriedients = new (string Name, int Value)[] //This is generated by chat gpt
+        {
+            ("tomato", tomato),
+            ("gluten products", glutenproducts),
+            ("chicken", chicken),
+            ("lettuce", lettuce)
+        };
+        
+        // Assume the first variable is the greatest
+        var greatest = ingriedients[0];
+
+        // Loop through the other variables and find the greatest one
+        foreach (var ingriedient in ingriedients)
+        {
+            if (ingriedient.Value > greatest.Value)
+            {
+                greatest = ingriedient;
+            }
+        }
+        Console.WriteLine (greatest.Name);
+        Console.WriteLine ("Recipe suggested:"); //In the real app the recipe suggested part will also display what you can make depending on ingiredients you have available at home
+        if (greatest.Name == "tomato")
+        {
+            Console.WriteLine("tomato soup");
+        }
+        if (greatest.Name == "glutenproducts")
+        {
+            Console.WriteLine("bread");
+        }
+        if (greatest.Name == "chicken")
+        {
+            Console.WriteLine("boiled chicken wings");
+        }
+        if (greatest.Name == "lettuce")
+        {
+            Console.WriteLine("garden salad");
+        }
+        
+        
+        
+        
+        
+    }
+}
